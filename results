@@ -1,0 +1,55 @@
+# Ignore the Rank Column, as that referes to the players placement in the original data set.  This table is ranked by adj.RPM, 
+# which takes into account their performance relative to other players of their position.  
+# Notice the rankings are close to, but do not completely agree with RPM
+
+    Rank                   Player    Team GP  MPG  ORPM  DRPM  RPM  WINS  adj.RPM
+149    1             LeBron James     CLE 76 35.6  6.49  3.30 9.79 21.55 9.972031
+1      1               Chris Paul     LAC 74 32.7  6.15  2.44 8.59 18.12 9.286232
+2      2            Stephen Curry      GS 79 34.2  7.65  0.86 8.51 21.10 9.206232
+213    1           Draymond Green      GS 81 34.7  3.93  5.04 8.97 22.66 8.988395
+3      3        Russell Westbrook     OKC 80 34.4  7.25  0.60 7.85 19.53 8.546232
+150    2            Kawhi Leonard      SA 72 33.1  4.19  3.88 8.07 16.74 8.252031
+4      4               Kyle Lowry     TOR 77 37.0  5.12  1.70 6.82 17.34 7.516232
+151    3             Kevin Durant     OKC 72 35.8  5.51  0.97 6.48 16.00 6.662031
+214    2             Nikola Jokic     DEN 80 21.7  2.42  3.61 6.03  9.88 6.048395
+70     1             James Harden     HOU 82 38.1  5.37 -0.98 4.39 15.07 5.513291
+215    3               Kevin Love     CLE 77 31.5  3.17  2.14 5.31 12.52 5.328395
+216    4             Paul Millsap     ATL 81 32.7  1.98  3.26 5.24 14.05 5.258395
+152    4              Paul George     IND 81 34.8  3.35  1.58 4.93 14.66 5.112031
+71     2            Manu Ginobili      SA 58 19.6  2.00  1.91 3.91  5.12 5.033291
+72     3          Khris Middleton     MIL 79 36.1  3.13  0.63 3.76 12.27 4.883291
+217    5         DeMarcus Cousins     SAC 65 34.6  1.58  3.25 4.83 12.03 4.848395
+5      5              Ricky Rubio     MIN 76 30.6  2.25  1.89 4.14 10.72 4.836232
+73     4              Danny Green      SA 79 26.1  0.32  2.93 3.25  8.18 4.373291
+153    5             Jimmy Butler     CHI 67 36.9  3.12  0.89 4.01 11.06 4.192031
+294    1           DeAndre Jordan     LAC 77 33.7  0.35  4.07 4.42 12.47 4.179062
+74     5           Victor Oladipo     ORL 72 33.0  1.80  0.79 2.59  8.65 3.713291
+218    6            Channing Frye CLE/ORL 70 17.1  1.43  2.25 3.68  5.01 3.698395
+6      6              Mike Conley     MEM 56 31.4  2.78  0.08 2.86  6.36 3.556232
+295    2             Cole Aldrich     LAC 60 13.3 -0.72  4.46 3.74  3.42 3.499063
+296    3                Pau Gasol     CHI 72 31.8  0.65  3.07 3.72  9.96 3.479063
+7      7                John Wall     WSH 77 36.2  2.60  0.12 2.72 10.62 3.416232
+75     6            C.J. McCollum     POR 80 34.8  2.20  0.05 2.25  9.54 3.373291
+8      8             Kemba Walker     CHA 81 35.6  2.93 -0.35 2.58 10.38 3.276232
+154    6              Jae Crowder     BOS 73 31.6  1.21  1.79 3.00  9.28 3.182031
+155    7           Gordon Hayward    UTAH 80 36.2  2.92 -0.02 2.90 10.50 3.082031
+9      9         Patrick Beverley     HOU 71 28.7  1.37  1.01 2.38  7.15 3.076232
+297    4             Andrew Bogut      GS 70 20.7 -2.24  5.45 3.21  6.03 2.969063
+219    7             Amir Johnson     BOS 79 22.8  0.12  2.83 2.95  7.11 2.968395
+76     7            Klay Thompson      GS 80 33.3  2.38 -0.61 1.77  8.70 2.893291
+10    10             Goran Dragic     MIA 72 32.8  1.42  0.70 2.12  7.73 2.816232
+77     8              Kyle Korver     ATL 80 30.0 -0.13  1.82 1.69  7.31 2.813291
+298    5               Al Horford     ATL 82 32.1  0.89  2.08 2.97 10.09 2.729063
+299    6           Andre Drummond     DET 81 32.9 -0.19  3.16 2.97 10.20 2.729063
+220    8            Dirk Nowitzki     DAL 75 31.5  2.14  0.56 2.70  8.36 2.718395
+221    9          Marvin Williams     CHA 81 28.9  2.08  0.59 2.67  8.51 2.688395
+222   10                 Ed Davis     POR 81 20.8 -0.02  2.62 2.60  6.05 2.618395
+223   11             Gorgui Dieng     MIN 82 27.1  0.03  2.54 2.57  7.98 2.588395
+300    7             Kelly Olynyk     BOS 69 20.2  0.69  2.13 2.82  5.44 2.579063
+224   12       Kristaps Porzingis      NY 72 28.4  0.24  2.26 2.50  7.09 2.518395
+301    8          Jared Sullinger     BOS 81 23.6  0.27  2.48 2.75  7.29 2.509063
+78     9 Kentavious Caldwell-Pope     DET 76 36.7  0.85  0.52 1.37  7.88 2.493291
+79    10               J.R. Smith     CLE 77 30.7  2.56 -1.22 1.34  6.49 2.463291
+156    8          Carmelo Anthony      NY 72 35.1  2.97 -0.73 2.24  8.40 2.422031
+302    9              Brook Lopez     BKN 73 33.7  0.47  2.18 2.65  9.00 2.409063
+11    11             Eric Bledsoe     PHX 31 34.2  1.31  0.39 1.70  3.32 2.396232
