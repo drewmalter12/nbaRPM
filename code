@@ -1,0 +1,144 @@
+# Our goal is to use the RPM stat for NBA players during the 2015-16 season, 
+# and find out which positions tend to have the highest RPM's.  Additionally, 
+# if a guard and a big man have identical RPM's, is one of them 'more valuable'
+# than the other?  
+
+#Upload RPM's for pg's
+basketball_pg <- read.csv("~/Documents/sports/basketball_pg.csv")
+mean(basketball_pg$RPM)
+#offensive efficiency
+mean(basketball_pg$ORPM)
+#defensive efficiency
+mean(basketball_pg$DRPM)
+#distribution of RPM's for pg's
+hist(basketball_pg$RPM, main = 'RPM Point Guards 2015-16', xlab = 'RPM',
+     xlim = c(-10,10))
+
+#sg
+basketball_sg <- read.csv("~/Documents/sports/basketball_sg.csv")
+mean(basketball_sg$RPM)
+mean(basketball_sg$ORPM)
+mean(basketball_sg$DRPM)
+#distribution of RPM's for sg's
+hist(basketball_sg$RPM, main = 'RPM Shooting Guards 2015-16', xlab = 'RPM',
+     xlim = c(-10,10))
+
+#sf
+basketball_sf <- read.csv("~/Documents/sports/basketball_sf.csv")
+mean(basketball_sf$RPM)
+mean(basketball_sf$ORPM)
+mean(basketball_sf$DRPM)
+#distribution of RPM's for sf's
+hist(basketball_sf$RPM, main = 'RPM Small Forwards 2015-16', xlab = 'RPM',
+     xlim = c(-10,10))
+
+#pf
+basketball_pf <- read.csv("~/Documents/sports/basketball_pf.csv")
+mean(basketball_pf$RPM)
+mean(basketball_pf$ORPM)
+mean(basketball_pf$DRPM)
+#distribution of RPM's for pf's
+hist(basketball_pf$RPM, main = 'RPM Power Forwards 2015-16', xlab = 'RPM',
+     xlim = c(-10,10))
+
+#c
+basketball_c <- read.csv("~/Documents/sports/basketball_c.csv")
+mean(basketball_c$RPM)
+mean(basketball_c$ORPM)
+mean(basketball_c$DRPM)
+#distribution of RPM's for c's
+hist(basketball_c$RPM, main = 'RPM Centers 2015-16', xlab = 'RPM',
+     xlim = c(-10,10))
+
+
+# compare offensive efficiency position by position
+o.positions <- c(mean(basketball_pg$ORPM), mean(basketball_sg$ORPM), 
+                 mean(basketball_sf$ORPM), mean(basketball_pf$ORPM), 
+                 mean(basketball_c$ORPM))
+
+barplot(o.positions, xlab = 'Positions', ylab = 'Offensive Efficiency'
+        , main = "Offense RPM 2015-2016", 
+        names.arg = 'pg, sg, sf, pf, c', ylim = c(-1.5, 0.5))
+# We see that point point guards are on average the most offensivly efficient
+# while centers are the least
+
+# compare defensive efficiency position by position
+d.positions <- c(mean(basketball_pg$DRPM), mean(basketball_sg$DRPM), 
+                 mean(basketball_sf$DRPM), mean(basketball_pf$DRPM), 
+                 mean(basketball_c$DRPM))
+
+barplot(d.positions, xlab = 'Positions', ylab = 'Defensive Efficiency'
+        , main = "Defense RPM 2015-2016", 
+        names.arg = 'pg, sg, sf, pf, c', ylim = c(-1.5, 1.5))
+# We see that Centers are the most defensively efficient while point guards
+# are the least
+
+# compare total efficiency position by position
+t.positions <- c(mean(basketball_pg$RPM), mean(basketball_sg$RPM), 
+                 mean(basketball_sf$RPM), mean(basketball_pf$RPM), 
+                 mean(basketball_c$RPM))
+
+barplot(t.positions, xlab = 'Positions', ylab = 'Efficiency'
+        , main = "RPM 2015-2016", 
+        names.arg = 'pg, sg, sf, pf, c', ylim = c(-1, 0.5))
+
+# Overall, Centers are on average the most efficient position while guards
+# are most inneficient
+
+# As the bar plots suggests, along with the different histograms, different
+# positions (types of players) have different standards for efficiency
+# We will now adjust each players RPM so that the average for each position
+# is the same, which will also give each histogram the same mean
+
+basketball_pg$adj.RPM <- basketball_pg$RPM - mean(basketball_pg$RPM)
+hist(basketball_pg$adj.RPM, main = 'Adj.RPM Point Guard 2015-16', 
+     xlab = 'Position Adjusted RPM',
+     xlim = c(-10,10))
+
+basketball_sg$adj.RPM <- basketball_sg$RPM - mean(basketball_sg$RPM)
+hist(basketball_sg$adj.RPM, main = 'Adj.RPM Shoting Guard 2015-16', 
+     xlab = 'Position Adjusted RPM',
+     xlim = c(-10,10))
+
+basketball_sf$adj.RPM <- basketball_sf$RPM - mean(basketball_sf$RPM)
+hist(basketball_sf$adj.RPM, main = 'Adj.RPM Small Forwards 2015-16', 
+     xlab = 'Position Adjusted RPM',
+     xlim = c(-10,10))
+
+basketball_pf$adj.RPM <- basketball_pf$RPM - mean(basketball_pf$RPM)
+hist(basketball_pf$adj.RPM, main = 'Adj.RPM Power Forwards 2015-16', 
+     xlab = 'Position Adjusted RPM',
+     xlim = c(-10,10))
+
+basketball_c$adj.RPM <- basketball_c$RPM - mean(basketball_c$RPM)
+hist(basketball_c$adj.RPM, main = 'Adj.RPM Centers 2015-16', 
+     xlab = 'Position Adjusted RPM',
+     xlim = c(-10,10))
+
+#Notice the histograms for small forwards and centers are the most normal, 
+# ranging from roughly -5 to 5.  Point Guards, Small Forwards, and Power Forwards
+#are skewed with a few outliers closing in on RPM = 10.  
+# (Not surprised as this includes Lebron, Harden, Currey, Paul...)
+# We can also see this numerically through the summary functions
+summary(basketball_pg$RPM)
+summary(basketball_sg$RPM)
+summary(basketball_sf$RPM)
+summary(basketball_pf$RPM)
+summary(basketball_c$RPM)
+
+
+# We will now be able to compare different 
+# types of players such as Ricky Rubio to Deandre Jordan
+all.players <- rbind(basketball_pg, basketball_sg, basketball_sf
+                    , basketball_pf, basketball_c)
+all.players <- all.players[order(all.players$adj.RPM, decreasing = TRUE),c(1:10)]
+head(all.players, n = 50)
+
+# Conclusion: Centers are more replacable than forwards and especially guards
+# Although Deandre Jordan has a higher RPM than Ricky Rubio, you'll I would
+# rather have rubio on my team (all other variables equal) because of the fact
+# that it is harder to find another guard who can replace Rubio than it is 
+# to find a Center than can replace Jordan. 
+
+# Also, as we shouldn't be surprised, Lebron is the most valuable player 
+# in the league and is also the most positive outlier for RPM for his position
