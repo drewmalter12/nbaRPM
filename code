@@ -135,8 +135,8 @@ all.players <- all.players[order(all.players$adj.RPM, decreasing = TRUE),c(1:10)
 head(all.players, n = 50)
 
 # Conclusion: Centers are more replacable than forwards and especially guards
-# Although Deandre Jordan has a higher RPM than Ricky Rubio, you'll I would
-# rather have rubio on my team (all other variables equal) because of the fact
+# Although Deandre Jordan has a higher RPM than Ricky Rubio, I would
+# Rubio is a more valuable player (all other variables equal) because of the fact
 # that it is harder to find another guard who can replace Rubio than it is 
 # to find a Center than can replace Jordan. 
 
