@@ -10,27 +10,18 @@ mean(basketball_pg$RPM)
 mean(basketball_pg$ORPM)
 #defensive efficiency
 mean(basketball_pg$DRPM)
-#distribution of RPM's for pg's
-hist(basketball_pg$RPM, main = 'RPM Point Guards 2015-16', xlab = 'RPM',
-     xlim = c(-10,10))
 
 #sg
 basketball_sg <- read.csv("~/Documents/sports/basketball_sg.csv")
 mean(basketball_sg$RPM)
 mean(basketball_sg$ORPM)
 mean(basketball_sg$DRPM)
-#distribution of RPM's for sg's
-hist(basketball_sg$RPM, main = 'RPM Shooting Guards 2015-16', xlab = 'RPM',
-     xlim = c(-10,10))
 
 #sf
 basketball_sf <- read.csv("~/Documents/sports/basketball_sf.csv")
 mean(basketball_sf$RPM)
 mean(basketball_sf$ORPM)
 mean(basketball_sf$DRPM)
-#distribution of RPM's for sf's
-hist(basketball_sf$RPM, main = 'RPM Small Forwards 2015-16', xlab = 'RPM',
-     xlim = c(-10,10))
 
 #pf
 basketball_pf <- read.csv("~/Documents/sports/basketball_pf.csv")
@@ -38,8 +29,6 @@ mean(basketball_pf$RPM)
 mean(basketball_pf$ORPM)
 mean(basketball_pf$DRPM)
 #distribution of RPM's for pf's
-hist(basketball_pf$RPM, main = 'RPM Power Forwards 2015-16', xlab = 'RPM',
-     xlim = c(-10,10))
 
 #c
 basketball_c <- read.csv("~/Documents/sports/basketball_c.csv")
@@ -90,55 +79,91 @@ barplot(t.positions, xlab = 'Positions', ylab = 'Efficiency'
 # We will now adjust each players RPM so that the average for each position
 # is the same, which will also give each histogram the same mean
 
-basketball_pg$adj.RPM <- basketball_pg$RPM - mean(basketball_pg$RPM)
-hist(basketball_pg$adj.RPM, main = 'Adj.RPM Point Guard 2015-16', 
-     xlab = 'Position Adjusted RPM',
+
+
+
+
+
+# Look at the distributions of RPM by position
+
+#distribution of RPM's for pg's
+hist(basketball_pg$RPM, main = 'RPM Point Guards 2015-16', xlab = 'RPM',
      xlim = c(-10,10))
+sd(basketball_pg$RPM)
 
-basketball_sg$adj.RPM <- basketball_sg$RPM - mean(basketball_sg$RPM)
-hist(basketball_sg$adj.RPM, main = 'Adj.RPM Shoting Guard 2015-16', 
-     xlab = 'Position Adjusted RPM',
+#distribution of RPM's for sg's
+hist(basketball_sg$RPM, main = 'RPM Shooting Guards 2015-16', xlab = 'RPM',
      xlim = c(-10,10))
+sd(basketball_sg$RPM)
 
-basketball_sf$adj.RPM <- basketball_sf$RPM - mean(basketball_sf$RPM)
-hist(basketball_sf$adj.RPM, main = 'Adj.RPM Small Forwards 2015-16', 
-     xlab = 'Position Adjusted RPM',
+#distribution of RPM's for sf's
+hist(basketball_sf$RPM, main = 'RPM Small Forwards 2015-16', xlab = 'RPM',
      xlim = c(-10,10))
+sd(basketball_sf$RPM)
 
-basketball_pf$adj.RPM <- basketball_pf$RPM - mean(basketball_pf$RPM)
-hist(basketball_pf$adj.RPM, main = 'Adj.RPM Power Forwards 2015-16', 
-     xlab = 'Position Adjusted RPM',
+#distribution of RPM's for pf's
+hist(basketball_pf$RPM, main = 'RPM Power Forwards 2015-16', xlab = 'RPM',
      xlim = c(-10,10))
+sd(basketball_pf$RPM)
 
-basketball_c$adj.RPM <- basketball_c$RPM - mean(basketball_c$RPM)
-hist(basketball_c$adj.RPM, main = 'Adj.RPM Centers 2015-16', 
-     xlab = 'Position Adjusted RPM',
+#distribution of RPM's for c's
+hist(basketball_c$RPM, main = 'RPM Centers 2015-16', xlab = 'RPM',
      xlim = c(-10,10))
+sd(basketball_c$RPM)
 
-#Notice the histograms for small forwards and centers are the most normal, 
-# ranging from roughly -5 to 5.  Point Guards, Small Forwards, and Power Forwards
-#are skewed with a few outliers closing in on RPM = 10.  
-# (Not surprised as this includes Lebron, Harden, Currey, Paul...)
-# We can also see this numerically through the summary functions
-summary(basketball_pg$RPM)
-summary(basketball_sg$RPM)
-summary(basketball_sf$RPM)
-summary(basketball_pf$RPM)
-summary(basketball_c$RPM)
+# Order of width of distributions from widest to narrowest are
+# pg, sf, pf, sg, c
 
 
-# We will now be able to compare different 
-# types of players such as Ricky Rubio to Deandre Jordan
+
+
+
+#Adjust each RPM so that the mean of every position's RPM equals zero
+
+basketball_pg$adj.RPM. <- basketball_pg$RPM - mean(basketball_pg$RPM)
+basketball_sg$adj.RPM. <- basketball_sg$RPM - mean(basketball_sg$RPM)
+basketball_sf$adj.RPM. <- basketball_sf$RPM - mean(basketball_sf$RPM)
+basketball_pf$adj.RPM. <- basketball_pf$RPM - mean(basketball_pf$RPM)
+basketball_c$adj.RPM. <- basketball_c$RPM - mean(basketball_c$RPM)
+
+#Adding to each RPM will not change the sd, so now we need to create a 
+# multiplier for each RPM based on the sd of each position. 
+# We want PG's to get the largest multiplier and C's to get the smallest.
+# To do this, we will take the recriprical of the mean of the SD's
+# of the rest of the positions excluding the position of interst
+# and multiply by 3 so that the new SD's are close to the original SD's
+
+# Finding the standard deviation of the rest of the RPM's 
+# minus specific position to use as a multiplier
+
+sd_pg <- mean(c(sd(basketball_sg$RPM), sd(basketball_sf$RPM),
+                sd(basketball_pf$RPM), sd(basketball_c$RPM)))
+sd_sg <- mean(c(sd(basketball_pg$RPM), sd(basketball_sf$RPM),
+                sd(basketball_pf$RPM), sd(basketball_c$RPM)))
+sd_sf <- mean(c(sd(basketball_sg$RPM), sd(basketball_pg$RPM),
+                sd(basketball_pf$RPM), sd(basketball_c$RPM)))
+sd_pf <- mean(c(sd(basketball_sg$RPM), sd(basketball_sf$RPM),
+                sd(basketball_pg$RPM), sd(basketball_c$RPM)))
+sd_c <- mean(c(sd(basketball_sg$RPM), sd(basketball_sf$RPM),
+               sd(basketball_pf$RPM), sd(basketball_pg$RPM)))
+
+
+basketball_pg$adj.RPM <- basketball_pg$adj.RPM. * (3/sd_pg)
+basketball_sg$adj.RPM <- basketball_sg$adj.RPM. * (3/sd_sg)
+basketball_sf$adj.RPM <- basketball_sf$adj.RPM. * (3/sd_sf)
+basketball_pf$adj.RPM <- basketball_pf$adj.RPM. * (3/sd_pf)
+basketball_c$adj.RPM <- basketball_c$adj.RPM. * (3/sd_c)
+
+
+
+
+# We will now combine each position into one dataset and compare 
+# players adjusted RPM's against each other
+
 all.players <- rbind(basketball_pg, basketball_sg, basketball_sf
-                    , basketball_pf, basketball_c)
+                     , basketball_pf, basketball_c)
 all.players <- all.players[order(all.players$adj.RPM, decreasing = TRUE),c(1:10)]
-head(all.players, n = 50)
+head(all.players, n = 6)
 
-# Conclusion: Centers are more replacable than forwards and especially guards
-# Although Deandre Jordan has a higher RPM than Ricky Rubio, I would
-# Rubio is a more valuable player (all other variables equal) because of the fact
-# that it is harder to find another guard who can replace Rubio than it is 
-# to find a Center than can replace Jordan. 
-
-# Also, as we shouldn't be surprised, Lebron is the most valuable player 
-# in the league and is also the most positive outlier for RPM for his position
+head(all.players[,c(2,3,8,10)], n = 25)
+head(all.players[,c(2,3,8,10)], n = 100)
