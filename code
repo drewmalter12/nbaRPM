@@ -129,7 +129,7 @@ basketball_c$adj.RPM. <- basketball_c$RPM - mean(basketball_c$RPM)
 #Adding to each RPM will not change the sd, so now we need to create a 
 # multiplier for each RPM based on the sd of each position. 
 # We want PG's to get the largest multiplier and C's to get the smallest.
-# To do this, we will take the recriprical of the mean of the SD's
+# To do this, we will take the recriprical of the combined SD's
 # of the rest of the positions excluding the position of interst
 # and multiply by 3 so that the new SD's are close to the original SD's
 
