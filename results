@@ -1,4 +1,4 @@
-# Ignore the Rank Column, as that refers to the players placement in the original data set.  This table is ranked by adj.RPM, 
+# Ignore the Rank Column, as that refers to the players placement in the original unordered data set.  This table is ranked by adj.RPM, 
 # which takes into account their performance relative to other players of their position.  
 # Notice the rankings are close to, but do not completely agree with RPM
 
